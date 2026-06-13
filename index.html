@@ -3,23 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini AI Chat</title>
-    <script src="https://js.puter.com/v2/"></script>
+    <title>Development Sandbox | Shadow Tech</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo">SHADOW//<span>DEV</span></div>
+        <nav class="nav-links">
+            <a href="#" class="active" onclick="switchTab('home')">Home</a>
+            <a href="#" onclick="switchTab('proxy')">Viewport</a>
+            <a href="#" onclick="switchTab('settings')">Settings</a>
+        </nav>
+    </header>
 
-    <header>Gemini AI Chat Application</header>
+    <main class="container">
+        <!-- Home Dashboard Segment -->
+        <section id="home-view" class="view-panel active">
+            <div class="search-box">
+                <h1>Web Interception Testbed</h1>
+                <p>Run internal request sandboxing using WebAssembly rewrites.</p>
+                <form id="proxy-form">
+                    <input type="text" id="url-input" placeholder="Enter target URL or search queries..." required autocomplete="off">
+                    <button type="submit">Launch</button>
+                </form>
+            </div>
 
-    <div id="chat-container">
-        <div class="message ai-message">Hello! I'm powered by Gemini via Puter.js. How can I help you today?</div>
-    </div>
+            <div class="quick-links">
+                <h3>Quick Targets</h3>
+                <div class="grid">
+                    <div class="card" onclick="launchTarget('https://google.com')">Google</div>
+                    <div class="card" onclick="launchTarget('https://github.com')">GitHub</div>
+                    <div class="card" onclick="launchTarget('https://discord.com')">Discord</div>
+                </div>
+            </div>
+        </section>
 
-    <div id="input-container">
-        <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
-        <button id="send-btn">Send</button>
-    </div>
+        <!-- Proxy Frame Viewport -->
+        <section id="proxy-view" class="view-panel">
+            <div class="control-bar">
+                <button onclick="reloadFrame()">Reload</button>
+                <button onclick="closeFrame()">Exit Frame</button>
+                <span id="frame-status">Status: Idle</span>
+            </div>
+            <div class="frame-wrapper">
+                <iframe id="sandbox-frame" src="about:blank"></iframe>
+            </div>
+        </section>
 
-    <script src="app.js"></script>
+        <!-- Settings Config Segment -->
+        <section id="settings-view" class="view-panel">
+            <h2>Instance Settings</h2>
+            <div class="setting-group">
+                <label for="transport-select">Transport Protocol Backend:</label>
+                <select id="transport-select">
+                    <option value="wisp">Wisp Protocol (WebSocket Multiplex)</option>
+                    <option value="epoxy">Epoxy (Direct WASM Client TCP)</option>
+                </select>
+            </div>
+        </section>
+    </main>
+
+    <script src="client.js"></script>
 </body>
 </html>
